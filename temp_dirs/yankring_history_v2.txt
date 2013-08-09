@@ -1,2 +1,7 @@
+,V
+map k gk,V
+map j gj,V
+" Treat long lines as break lines (useful when moving around in them),V
+ruichao/vim-config,v
 viminfo,v
 sh ~/.vim_runtime/install_awesome_vimrc.sh,v
