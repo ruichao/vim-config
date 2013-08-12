@@ -9,9 +9,6 @@
 " Blog_post: 
 "       http://amix.dk/blog/post/19691#The-ultimate-Vim-configuration-on-Github
 "
-" Syntax_highlighted:
-"       http://amix.dk/vim/vimrc.html
-"
 " Sections:
 "    -> Vundle 
 "    -> General
@@ -55,6 +52,12 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/syntastic'
 Bundle 'Lokaltog/vim-powerline'
+Bundle 'kien/ctrlp.vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'myusuf3/numbers.vim'
+Bundle 'Shougo/neocomplcache.vim'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'myusuf3/numbers.vim'
 " Vim-scripts repos
 " Bundle 'L9'
 
@@ -119,6 +122,7 @@ endif
 
 "Always show current position
 set ruler
+set number
 
 " Height of the command bar
 set cmdheight=2
@@ -335,6 +339,8 @@ set viminfo^=%
 set t_Co=256
 " Always show the status line
 set laststatus=2
+" Fancy mode of Powerline
+"let g:Powerline_symbols='fancy'
 " display keystrokes in status line
 set showcmd
 " Format the status line

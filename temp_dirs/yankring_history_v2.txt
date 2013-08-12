@@ -1,11 +1,100 @@
-d,v
-" let g:Powerline_theme='solarized256',V
-" Powerline theme ,V
-",v
-let g:Powerline_theme='skwp',V
+Bundle '',V
+!,v
+Google Nexus 7 FHD,v
+Стрельна,v
+Интернет-кафе \"59-57\",v
+Зеркальный зал (Гостинично-ресторанный комплекс "Коломяжский визит"),v
  ,v
-solarized256.vim,v
-    set t_Co=256,V
+#,v
+## !/^[^А-Яа-яA-Za-z]+$/i,V
+Batch & Beer,v
+/,v
+B,v
+&,v
+            print(valueArray[i]);,V
+",v
+\,v
+е,v
+ф,v
+а,v
+К,v
+x,v
+,v
+FM-club,v
+//@ ('Интернет-кафе "FM-club"').should == "FM-club",V
+r,v
+a,v
+v,v
+    print(value);,V
+    var valueArray = value.split(/\//);,V
+        print(name);,V
+    print('va');,V
+        print('IN');,V
+Art-Spirit / Арт-Спирит,v
+//@ ("Art-Spirit / Арт-Спирит").should == "Арт-Спирит",V
+//@ ('Кафе "Simple-bar / Симпл-бар Винотека Арама и Ольги (РГ Пробка / Probka)"').should == "Симпл-бар Винотека Арама и Ольги (РГ Пробка)",V
+{"md5":"c9c9fe85e5f5432debec4d8e26d5fe39","processingState":"UNPROCESSED","payload":{"_header":"Интернет-кафе \"FM-club\"","phone":"(812) 764-36-74, 764-66-42","street_address":"Санкт-Петербург, Достоевского ул., 6","subway":"Владимирская","cuisine":"закуски","category":"Интернет-кафе","website":null,"capacity":null,"hours":"c 10:00 до 08:00","price":null,"features":null,"entertainment":null,"neighborhood":"Центральный","parking":null,"date_opened":null,"note":"2 зала (45/15 мест)","details_url":"http://www.allcafe.info/restaurants/to/102460/"},"inputDate":1367920688000,"inputMeta":{"origin":"SEED","type":"STANDARD","sourceUrl":"http://www.allcafe.info/restaurants/17?rayon=0&metro=0&type=0&food=0&name=","notes":{}}},V
+{"md5":"c340308d37ce23b7d1e4b5d63bc78965","processingState":"UNPROCESSED","payload":{"_header":"Клуб \"Flyer / Флаер\"","phone":"(812) 327-76-54","street_address":"Санкт-Петербург, Малый пр. В.О., 54","subway":"Приморская, Василеостровская","cuisine":"европейская","category":"Клуб, Ресторан, Боулинг","website":null,"capacity":null,"hours":"c 12:00 до 06:00","price":null,"features":null,"entertainment":null,"neighborhood":"Василеостровский","parking":"Есть","date_opened":null,"note":"ресторан - 80 мест, кафе - 60 мест, тир, аэрохоккей. По выходным - с 10 часов утра","details_url":"http://www.allcafe.info/restaurants/to/105506/"},"inputDate":1367920688000,"inputMeta":{"origin":"SEED","type":"STANDARD","sourceUrl":"http://www.allcafe.info/restaurants/17?rayon=0&metro=0&type=0&food=0&name=","notes":{}}},V
+Flyer / Флаер,v
+    // remain Russian Name if both have Russian name and English name splited by '/',V
+        print(nameExtended);,V
+    value = value.trim();,V
+        print(value);,V
+        print();,V
+k,v
+b,v
+o,v
+P,v
+-,v
+e,v
+l,v
+p,v
+m,v
+i,v
+S,v
+Компания СПБ Пермь, ООО,v
+//@ ('ООО «Компания „СПБ Пермь”»').should == "Компания СПБ Пермь, ООО",V
+    nameExtendedReg = /(.*)\((.*)\)/;,V
+=,v
+    if(nameArry){        for(var i=0; i < nameArry.length; i++){,V
+    nameArry = value.split(/\//);    if(nameArry){        for(var i=0; i < nameArry.length; i++){            if(!(/^[ \-&\da-zA-Z]*$/.test(nameArry[i]))){                value = nameArry[i];            }        }    },V
+Simple-bar / Симпл-бар Винотека Арама и Ольги (РГ Пробка / Probka),v
+],v
+»,v
+[,v
+«,v
+/\b({poi.ru.Regex#org_acronym})\b ["«]([^"]*)["»]\s*$/i	$2, $1,V
+?,v
+„,v
+”,v
+ООО ,v
+6 левел,v
+Интернет-кафе "6-th level / 6 левел",v
+//@ ('Интернет-кафе "6-th level / 6 левел"').should == "6 левел",V
+/«(.*)»/i	"$1",V
+/(.*)\((.*)\)/	$1,V
+## remove name extended,V
+/^.*"(.*)"/	$1,V
+## replace first quotation («») marks with "",V
+/«(.*)»/i	"$1"## deal with org_acronym,V
+),v
+*,v
+.,v
+(,v
+«(.*)»,v
+^,v
+/\b({poi.ru.Regex#org_acronym})\b "?([^"]*)"? *$/i	$2, $1/(?<!,) ({poi.ru.Regex#org_acronym})$/i	, $1/^'(.*)', ({poi.ru.Regex#org_acronym})$/i	$1, $2,V
+/^.*"(.*)"/i	$1,V
+{"md5":"36534a9e3f834056258b88fb6402b0de","processingState":"UNPROCESSED","payload":{"_header":"ООО «Компания „СПБ Пермь”»","Адрес":"г.Пермь, ул.Героев Хасана, д.34, Т/К «Чкаловский», пав.№1","E-mail":"office@spb-company.ru","text_01":"→","text_02":"Вид деятельности:","→":{"href":"http://www.proektstroy.ru/end-of-exposition/6087"}},"inputDate":1289260800000,"inputMeta":{"origin":"FIELD_GRABBER","type":"STANDARD","sourceUrl":"http://www.proektstroy.ru/companies/27/0?page=15&razd=2","notes":{"extractType":"dir","recordType":"header_fallback","orig_header":"→","abs_details_url":"http://www.proektstroy.ru/end-of-exposition/6087","path":"/html/body/table[3]/tr/td[1]/div[3]/table[7]"}}},v
+/^.*«(.*)»/i	$1,V
+            print(nameArry[i]);,V
+## /\s+,/gi	,,V
+## /\s+/gi	 ,V
+g,v
+h,v
 t,v
-",V
-http://developer.yahoo.com/hadoop/tutorial/,v
+6,v
+к,v
+Интернет,v
+ Арт-Спири,v
+    value = decodeURI(value);    value = cleanName.apply(value);,V
