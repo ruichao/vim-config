@@ -9,23 +9,14 @@
 " Blog_post: 
 "       http://amix.dk/blog/post/19691#The-ultimate-Vim-configuration-on-Github
 "
-" Awesome_version:
-"       Get this config, nice color schemes and lots of plugins!
-"
-"       Install the awesome version from:
-"
-"           https://github.com/amix/vimrc
-"
 " Syntax_highlighted:
 "       http://amix.dk/vim/vimrc.html
 "
-" Raw_version: 
-"       http://amix.dk/vim/vimrc.txt
-"
 " Sections:
+"    -> Vundle 
 "    -> General
 "    -> VIM user interface
-"    -> Colors and Fonts
+"    -> Colors, Coding and Fonts
 "    -> Files and backups
 "    -> Text, tab and indent related
 "    -> Visual mode related
@@ -41,14 +32,54 @@
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Vundle
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible
+
+" vundle {
+filetype off   "required!
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required
+Bundle 'gmarik/vundle'
+" }
+
+
+" { My Bundles here:
+" original repos on github
+" Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-surround'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/syntastic'
+Bundle 'Lokaltog/vim-powerline'
+" Vim-scripts repos
+" Bundle 'L9'
+
+
+" non github repos
+"Bundle 'git://git.wincent.com/command-t.git'
+
+" }
+
+filetype on "required!
+filetype indent on "required!
+
+" Brief help
+" :BundleList   - list configured bundles
+" :BundleInstall  - install( update ) bundles
+" :BundleSearch foo - search for foo
+" :BundleClean  - confirm(or auto-approve) removal of unused bundles
+" see :h vundle for more details
+" NOTE: comments after Bundle command are not allowed..
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sets how many lines of history VIM has to remember
 set history=700
-
-" Enable filetype plugins
-filetype plugin on
-filetype indent on
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -70,10 +101,13 @@ command W w !sudo tee % > /dev/null
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set 7 lines to the cursor - when moving vertically using j/k
-set so=7
+" the number of context lines you would like to see above and below the cursor
+" set so=7
+set scrolloff=7
 
 " Turn on the WiLd menu
 set wildmenu
+set wildmode=list:longest,full
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
@@ -116,6 +150,7 @@ set magic
 
 " Show matching brackets when text indicator is over them
 set showmatch 
+
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
@@ -141,6 +176,7 @@ catch
 endtry
 
 set background=dark
+set guifont=Menlo\ for\ PowerLine:h14
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -148,14 +184,57 @@ if has("gui_running")
     set guioptions-=e
     set t_Co=256
     set guitablabel=%M\ %t
+    set go=aAce              " 去掉难看的工具栏和滑动条
+    set guifont=Monaco:h14   " 设置默认字体为monaco
 endif
 
+" Use mac as the standard file type
+set ffs=mac,unix,dos
+
+" { encoding, filecodings setting
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
-" Use Unix as the standard file type
-set ffs=unix,dos,mac
+"encoding script
+if has("multi_byte")
+    "set fileencoding priority
+    if getfsize(expand("%")) > 0
+        set fileencodings=ucs-bom,utf-8,cp936,big5,euc-jp,euc-kr,latain1
+    else
+        set fileencodings=cp936,big5,euc-jp,euc-kr,latain1
+    endif
 
+    "CJK environment detection and corresponding setting
+    if v:lang =~ "^zh_CN"
+        "Use cp936 to support GBK, euc-cn == gb2312
+        set encoding=cp936
+        set termencoding=cp936
+        set fileencoding=cp936
+    elseif v:lang =~ "^zh_TW"
+        "cp950, big5 or euc-tw
+        set encoding=big5
+        set termencoding=big5
+        set fileencoding=big5
+    elseif v:lang =~ "^ko"
+        set encoding=euc-kr
+        set termencoding=euc-kr
+        set fileencoding=euc-kr
+    elseif v:lang =~ "^ja_JP"
+        set encoding=euc-jp
+        set termencoding=euc-jp
+        set fileencoding=enc-jp
+    endif
+
+    " Detect UTF-8 locale, and replace CJK setting if needed
+    if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
+        set encoding=utf-8
+        set termencoding=utf-8
+        set fileencoding=utf-8
+    endif
+else
+    echoerr "Sorry, this version of (g)vim was not compiled with multi_byte"
+endif
+" }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
@@ -183,8 +262,8 @@ set tabstop=4
 set lbr
 set tw=500
 
-set ai "Auto indent
-set si "Smart indent
+set autoindent "Auto indent
+set smartindent "Smart indent
 set wrap "Wrap lines
 
 
@@ -202,7 +281,7 @@ vnoremap <silent> # :call VisualSelection('b', '')<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
 map <space> /
-map <c-space> ?
+map <C-@> ?
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
@@ -252,16 +331,19 @@ set viminfo^=%
 """"""""""""""""""""""""""""""
 " => Status line
 """"""""""""""""""""""""""""""
+" Explicitly tell Vime that the terminal supports 256 colors
+set t_Co=256
 " Always show the status line
 set laststatus=2
-
+" display keystrokes in status line
+set showcmd
 " Format the status line
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remap VIM 0 to first non-blank character
 map 0 ^
 

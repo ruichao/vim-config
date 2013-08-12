@@ -1,7 +1,11 @@
-,V
-map k gk,V
-map j gj,V
-" Treat long lines as break lines (useful when moving around in them),V
-ruichao/vim-config,v
-viminfo,v
-sh ~/.vim_runtime/install_awesome_vimrc.sh,v
+d,v
+" let g:Powerline_theme='solarized256',V
+" Powerline theme ,V
+",v
+let g:Powerline_theme='skwp',V
+ ,v
+solarized256.vim,v
+    set t_Co=256,V
+t,v
+",V
+http://developer.yahoo.com/hadoop/tutorial/,v
