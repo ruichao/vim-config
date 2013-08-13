@@ -1,12 +1,12 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Maintainer: 
+" Maintainer:
 "       Amir Salihefendic
 "       http://amix.dk - amix@amix.dk
 "
-" Version: 
+" Version:
 "       1.0 - 12/08/13
 " Sections:
-"    -> Vundle 
+"    -> Vundle
 "    -> General
 "    -> VIM user interface
 "    -> Colors, Coding and Fonts
@@ -20,17 +20,14 @@
 "    -> Spell checking
 "    -> Misc
 "    -> Helper functions
-"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-" => Vundle 
+" => Vundle
     set nocompatible
-    
     filetype off   "required!
     set rtp+=~/.vim/bundle/vundle/
     call vundle#rc()
-    
     " let Vundle manage Vundle
     " required
     Bundle 'gmarik/vundle'
@@ -49,13 +46,13 @@
         Bundle 'Shougo/neocomplcache.vim'
         Bundle 'Lokaltog/vim-easymotion'
         Bundle 'myusuf3/numbers.vim'
+        Bundle 'mbbill/undotree'
     
         " Vim-scripts repos
         " Bundle 'L9'
         
         " non github repos
         "Bundle 'git://git.wincent.com/command-t.git'
-        
     " }
 
     filetype on "required!
@@ -69,7 +66,7 @@
     " see :h vundle for more details
     " NOTE: comments after Bundle command are not allowed..
 
-" => General 
+" => General
     " Sets how many lines of history VIM has to remember
     set history=700
     
@@ -86,6 +83,7 @@
     let g:mapleader=","
 
     set timeoutlen=2000
+    set pastetoggle=<F12>
     
     " Fast saving
     nmap <leader>w :w!<cr>
@@ -94,7 +92,7 @@
     " (useful for handling the permission-denied error)
     command W w !sudo tee % > /dev/null
 
-" => VIM user interface 
+" => VIM user interface
     " Set 7 lines to the cursor - when moving vertically using j/k
     " the number of context lines you would like to see above and below the cursor
     " set so=7
@@ -119,6 +117,8 @@
     set number
     " Highlight current line
     set cursorline
+    " add < and > as matchpairs 
+    set matchpairs+=<:> 
     
     " Height of the command bar
     set cmdheight=1
@@ -155,13 +155,14 @@
     set mat=2
     
     " Highligt problematic whitespcae
-    set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
+    set list
+    set listchars=tab:>·,trail:•,extends:#,nbsp:.
     " No annoying sound on errors
     set noerrorbells
     set novisualbell
     set t_vb=
 
-" => Fold 
+" => Fold
     " Auto fold code
     set foldenable
     set foldmethod=indent
@@ -179,7 +180,7 @@
     nmap <leader>f7 :set foldlevel=7<CR>
     nmap <leader>f8 :set foldlevel=8<CR>
     nmap <leader>f9 :set foldlevel=9<CR>
-    
+
 
 " => Colors and Fonts {
     " Enable syntax highlighting
@@ -336,7 +337,6 @@
          \ endif
     " Remember info about open buffers on close
     set viminfo^=%
-    
 
 " => Status line
     " Explicitly tell Vime that the terminal supports 256 colors
@@ -349,7 +349,6 @@
     set showcmd
     " Format the status line
     set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
-    
 
 " => Editing mappings
     " Remap VIM 0 to first non-blank character
@@ -376,7 +375,6 @@
     endfunc
     autocmd BufWrite *.py :call DeleteTrailingWS()
     autocmd BufWrite *.coffee :call DeleteTrailingWS()
-    
 
 " => vimgrep searching and cope displaying
     " When you press gv you vimgrep after the selected text
@@ -417,7 +415,6 @@
     map <leader>sp [s
     map <leader>sa zg
     map <leader>s? z=
-    
 
 " => Misc
     " Remove the Windows ^M - when the encodings gets messed up
@@ -428,7 +425,6 @@
     
     " Toggle paste mode on and off
     map <leader>pp :setlocal paste!<cr>
-    
 
 
 " => Helper functions
