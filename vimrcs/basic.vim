@@ -39,7 +39,6 @@
         Bundle 'scrooloose/nerdtree'
         Bundle 'scrooloose/nerdcommenter'
         Bundle 'scrooloose/syntastic'
-        Bundle 'Lokaltog/vim-powerline'
         Bundle 'kien/ctrlp.vim'
         Bundle 'tpope/vim-fugitive'
         Bundle 'myusuf3/numbers.vim'
@@ -47,10 +46,15 @@
         Bundle 'Lokaltog/vim-easymotion'
         Bundle 'myusuf3/numbers.vim'
         Bundle 'mbbill/undotree'
-    
+        Bundle 'airblade/vim-gitgutter'
+        Bundle 'tpope/vim-abolish.git'
+        if (has("python") || has("python3"))
+            Bundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
+        else
+            Bundle 'bling/vim-airline'
+        endif
         " Vim-scripts repos
         " Bundle 'L9'
-        
         " non github repos
         "Bundle 'git://git.wincent.com/command-t.git'
     " }
@@ -69,14 +73,12 @@
 " => General
     " Sets how many lines of history VIM has to remember
     set history=700
-    
     " Set to auto read when a file is changed from the outside
     set autoread
     " Automatically enable mouse usage
     set mouse=a
     " Hide the mouse cursor while typing
     set mousehide
-    
     " With a map leader it's possible to do extra key combinations
     " like <leader>w saves the current file
     let mapleader=","
@@ -84,11 +86,9 @@
 
     set timeoutlen=2000
     set pastetoggle=<F12>
-    
     " Fast saving
     nmap <leader>w :w!<cr>
-    
-    " :W sudo saves the file 
+    " :W sudo saves the file
     " (useful for handling the permission-denied error)
     command W w !sudo tee % > /dev/null
 
@@ -97,13 +97,23 @@
     " the number of context lines you would like to see above and below the cursor
     " set so=7
     set scrolloff=7
-    
+    set shortmess+=filmnrxoOtT
+    set virtualedit=onemore " allow for cursor beyond last character
+
+    au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.',[0,1,1,0])
+
+    if has('persistent_undo')
+        set undofile    "So is persistent undo
+        set undolevels=1000     "Maximum number of changes that can be undone
+        set undoreload=10000    "Maximum number lines to save for undo on a buffer reload
+    endif
+
     " Turn on the WiLd menu
     " Show list instead of just completing
     set wildmenu
     " Command <Tab> Completion, list matches. then loongest common part, then all.
     set wildmode=list:longest,full
-    
+
     " Ignore compiled files
     set wildignore=*.o,*~,*.pyc
     if has("win16") || has("win32")
@@ -111,52 +121,43 @@
     else
         set wildignore+=.git\*,.hg\*,.svn\*
     endif
-    
+
     "Always show current position
     set ruler
+    " Show line number
     set number
     " Highlight current line
     set cursorline
     " add < and > as matchpairs 
     set matchpairs+=<:> 
-    
     " Height of the command bar
     set cmdheight=1
-    
     " A buffer becomes hidden when it is abandoned
     set hid
-    
     " Configure backspace so it acts as it should act
     set backspace=eol,start,indent
     set whichwrap+=<,>,h,l
-    
     " Ignore case when searching
     set ignorecase
-    
     " When searching try to be smart about cases 
     set smartcase
-    
     " Highlight search results
     set hlsearch
-    
     " Makes search act like search in modern browsers
     set incsearch 
-    
     " Don't redraw while executing macros (good performance config)
     set lazyredraw 
-    
     " For regular expressions turn magic on
     set magic
-    
     " Show matching brackets when text indicator is over them
     set showmatch 
-    
     " How many tenths of a second to blink when matching brackets
     set mat=2
-    
     " Highligt problematic whitespcae
     set list
     set listchars=tab:>·,trail:•,extends:#,nbsp:.
+    " Remove trailing whitespaces and ^M chars
+    autocmd FileType c,cpp,java,go,php,javascript,python,twig,xml,yml autocmd BufWritePre <buffer> call StripTrailingWhitespace()
     " No annoying sound on errors
     set noerrorbells
     set novisualbell
@@ -166,7 +167,7 @@
     " Auto fold code
     set foldenable
     set foldmethod=indent
-    set foldlevel=0
+    set foldlevel=99
     " Add a bit extra margin to the left
     set foldcolumn=2
     " Code folding options
@@ -185,15 +186,15 @@
 " => Colors and Fonts {
     " Enable syntax highlighting
     syntax enable 
-    
+
     try
         colorscheme desert
     catch
     endtry
-    
+
     set background=dark
     set guifont=Menlo\ for\ PowerLine:h14
-    
+
     " Set extra options when running in GUI mode
     if has("gui_running")
         set guioptions-=T
@@ -203,14 +204,14 @@
         set go=aAce              " 去掉难看的工具栏和滑动条
         set guifont=Monaco:h14   " 设置默认字体为monaco
     endif
-    
-    " Use mac as the standard file type
-    set ffs=mac,unix,dos
-    
+
+    " Use unix, as the standard file type
+    set ffs=unix,mac,dos
+
     " { encoding, filecodings setting
     " Set utf8 as standard encoding and en_US as the standard language
     set encoding=utf8
-    
+
     "encoding script
     if has("multi_byte")
         "set fileencoding priority
@@ -219,7 +220,7 @@
         else
             set fileencodings=cp936,big5,euc-jp,euc-kr,latain1
         endif
-    
+
         "CJK environment detection and corresponding setting
         if v:lang =~ "^zh_CN"
             "Use cp936 to support GBK, euc-cn == gb2312
@@ -240,7 +241,7 @@
             set termencoding=euc-jp
             set fileencoding=enc-jp
         endif
-    
+
         " Detect UTF-8 locale, and replace CJK setting if needed
         if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
             set encoding=utf-8
@@ -250,7 +251,7 @@
     else
         echoerr "Sorry, this version of (g)vim was not compiled with multi_byte"
     endif
-    
+
     " }
 
 " => Files, backups and undo
@@ -263,22 +264,22 @@
 " => Text, tab and indent related
     " Use spaces instead of tabs
     set expandtab
-    
+
     " Be smart when using tabs ;)
     set smarttab
-    
+
     " 1 tab == 4 spaces
     set shiftwidth=4
     set tabstop=4
     " Let backspace delete 4 spaces
     set softtabstop=4
-    
+
     " Linebreak on 500 characters
     set lbr
     set tw=500
     " Indent at the same level of the previous line
     set autoindent
-    
+
     set smartindent "Smart indent
     set wrap "Wrap lines
 
@@ -293,29 +294,34 @@
     " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
     map <space> /
     map <C-@> ?
-    
-    " Disable highlight when <leader><cr> is pressed
-    map <silent> <leader><cr> :noh<cr>
-    
+
+    " Toggle search highlighting
+    nmap <silent> <leader>/ :set invhlsearch<cr>
+
+    " Visual shifting ( does not exit Visual mode)
+    vnoremap <  <gv
+    vnoremap >  >gv
+
+
     " Smart way to move between windows
     map <C-j> <C-W>j
     map <C-k> <C-W>k
     map <C-h> <C-W>h
     map <C-l> <C-W>l
-    
+
     " Close the current buffer
     map <leader>bd :Bclose<cr>
-    
+
     " Close all the buffers
     map <leader>ba :1,1000 bd!<cr>
-    
+
     " Useful mappings for managing tabs
     map <leader>tn :tabnew<cr>
     map <leader>to :tabonly<cr>
     map <leader>tc :tabclose<cr>
     map <leader>tm :tabmove 
     map <leader>t<leader> :tabnext 
-    
+
     " Opens a new tab with the current buffer's path
     " Super useful when editing files in the same directory
     map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
@@ -343,12 +349,23 @@
     set t_Co=256
     " Always show the status line
     set laststatus=2
-    " Fancy mode of Powerline
-    "let g:Powerline_symbols='fancy'
     " display keystrokes in status line
     set showcmd
     " Format the status line
-    set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+    if has('statusline')
+        set laststatus=2
+
+        " Broken down into easily includeable segments
+        set statusline=%<%f\                     " Filename
+        set statusline+=%w%h%m%r                 " Options
+        set statusline+=%{fugitive#statusline()} " Git Hotness
+        set statusline+=\ [%{&ff}/%Y]            " Filetype
+        set statusline+=\ [%{getcwd()}]          " Current dir
+        set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+
+        let g:airline_theme='powerlineish'       " airline users use the powerline theme
+        let g:airline_powerline_fonts=1          " and the powerline fonts
+    endif
 
 " => Editing mappings
     " Remap VIM 0 to first non-blank character
