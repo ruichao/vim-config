@@ -47,6 +47,9 @@
         Bundle 'myusuf3/numbers.vim'
         Bundle 'mbbill/undotree'
         Bundle 'airblade/vim-gitgutter'
+        Bundle 'altercation/vim-colors-solarized'
+        Bundle 'spf13/vim-colors'
+        Bundle 'spf13/vim-autoclose'
         Bundle 'tpope/vim-abolish.git'
         Bundle 'Lokaltog/vim-powerline'
         " Vim-scripts repos
@@ -149,6 +152,12 @@
     set listchars=tab:>·,trail:•,extends:#,nbsp:.
     " Remove trailing whitespaces and ^M chars
     autocmd FileType c,cpp,java,go,php,javascript,python,twig,xml,yml autocmd BufWritePre <buffer> call StripTrailingWhitespace()
+    " Automatically switch to the current file directory when a new buffer is opened
+    autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
+    " Allow buffer switching without saving
+    set hidden
+    " Display the current mode
+    set showmode
     " No annoying sound on errors
     set noerrorbells
     set novisualbell
@@ -348,10 +357,12 @@
 " => Status line
     " Explicitly tell Vime that the terminal supports 256 colors
     set t_Co=256
-    " Always show the status line
-    set laststatus=2
     " display keystrokes in status line
-    set showcmd
+    if has('cmdline_info')
+        set ruler   " Show the ruler
+        set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
+        set showcmd
+    endif
     " Format the status line
     if has('statusline')
         set laststatus=2
@@ -363,6 +374,13 @@
         set statusline+=\ [%{getcwd()}]          " Current dir
         set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
     endif
+    if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
+        let g:solarized_termcolors=256
+        color solarized                 " Load a colorscheme
+    endif
+    let g:solarized_termtrans=1
+    let g:solarized_contrast="high"
+    let g:solarized_visibility="high"
 
 " => Editing mappings
     " Remap VIM 0 to first non-blank character
