@@ -48,11 +48,7 @@
         Bundle 'mbbill/undotree'
         Bundle 'airblade/vim-gitgutter'
         Bundle 'tpope/vim-abolish.git'
-        if (has("python") || has("python3"))
-            Bundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
-        else
-            Bundle 'bling/vim-airline'
-        endif
+        Bundle 'Lokaltog/vim-powerline'
         " Vim-scripts repos
         " Bundle 'L9'
         " non github repos
@@ -102,11 +98,6 @@
 
     au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.',[0,1,1,0])
 
-    if has('persistent_undo')
-        set undofile    "So is persistent undo
-        set undolevels=1000     "Maximum number of changes that can be undone
-        set undoreload=10000    "Maximum number lines to save for undo on a buffer reload
-    endif
 
     " Turn on the WiLd menu
     " Show list instead of just completing
@@ -193,7 +184,6 @@
     endtry
 
     set background=dark
-    set guifont=Menlo\ for\ PowerLine:h14
 
     " Set extra options when running in GUI mode
     if has("gui_running")
@@ -205,6 +195,7 @@
         set guifont=Monaco:h14   " 设置默认字体为monaco
     endif
 
+    set t_Co=256
     " Use unix, as the standard file type
     set ffs=unix,mac,dos
 
@@ -259,7 +250,17 @@
     set nobackup
     set nowb
     set noswapfile
+    if has('persistent_undo')
+        set undofile    "So is persistent undo
+        set undolevels=1000     "Maximum number of changes that can be undone
+        set undoreload=10000    "Maximum number lines to save for undo on a buffer reload
+    endif
 
+    " set swap(.swp), backup(~), undo(.udf) directory to vim installation
+    " Please make sure the directory exists otherwise current directory will be used
+    set directory=~/.vim_runtime/swap//,.,/tmp//
+    set backupdir=~/.vim_runtime/backup//,.,/tmp//
+    set undodir=~/.vim_runtime/undo//,.,/tmp//
 
 " => Text, tab and indent related
     " Use spaces instead of tabs
@@ -319,23 +320,23 @@
     map <leader>tn :tabnew<cr>
     map <leader>to :tabonly<cr>
     map <leader>tc :tabclose<cr>
-    map <leader>tm :tabmove 
-    map <leader>t<leader> :tabnext 
+    map <leader>tm :tabmove<cr>
+    map <leader>t<leader> :tabnext<cr>
 
     " Opens a new tab with the current buffer's path
     " Super useful when editing files in the same directory
     map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
-    
+
     " Switch CWD to the directory of the open buffer
     map <leader>cd :cd %:p:h<cr>:pwd<cr>
-    
+
     " Specify the behavior when switching between buffers 
     try
       set switchbuf=useopen,usetab,newtab
       set stal=2
     catch
     endtry
-    
+
     " Return to last edit position when opening files (You want this!)
     autocmd BufReadPost *
          \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -354,7 +355,6 @@
     " Format the status line
     if has('statusline')
         set laststatus=2
-
         " Broken down into easily includeable segments
         set statusline=%<%f\                     " Filename
         set statusline+=%w%h%m%r                 " Options
@@ -362,9 +362,6 @@
         set statusline+=\ [%{&ff}/%Y]            " Filetype
         set statusline+=\ [%{getcwd()}]          " Current dir
         set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
-
-        let g:airline_theme='powerlineish'       " airline users use the powerline theme
-        let g:airline_powerline_fonts=1          " and the powerline fonts
     endif
 
 " => Editing mappings
