@@ -35,23 +35,41 @@
     "  My Bundles here {
         " original repos on github
         " Bundle 'tpope/vim-fugitive'
-        Bundle 'tpope/vim-surround'
-        Bundle 'scrooloose/nerdtree'
-        Bundle 'scrooloose/nerdcommenter'
-        Bundle 'scrooloose/syntastic'
-        Bundle 'kien/ctrlp.vim'
-        Bundle 'tpope/vim-fugitive'
-        Bundle 'myusuf3/numbers.vim'
+        " General
+            Bundle 'scrooloose/nerdtree'
+            Bundle 'altercation/vim-colors-solarized'
+            Bundle 'spf13/vim-colors'
+            Bundle 'spf13/vim-autoclose'
+            Bundle 'tpope/vim-surround'
+            Bundle 'tpope/vim-repeat'
+            Bundle 'kien/ctrlp.vim'
+            Bundle 'terryma/vim-multiple-cursors'
+            Bundle 'vim-scripts/sessionman.vim'
+            Bundle 'matchit.zip'
+            Bundle 'Lokaltog/vim-asymotion'
+            Bundle 'godlygeek/csapprox'
+            Bundle 'jistr/vim-nerdtree-tabs'
+            Bundle 'flazz/vim-colorschemes'
+            Bundle 'mbbill/undotree'
+            Bundle 'myusuf3/numbers.vim'
+            Bundle 'nathanaelkane/vim-indent-guides'
+            Bundle 'tpope/vim-abolish.git'
+        " General Programming
+            " Pick one of the checksyntax, jslint, or syntastic
+            Bundle 'scrooloose/syntastic'
+            Bundle 'tpope/vim-fugitive'
+            Bundle 'mattn/webapi-vim'
+            Bundle 'mattn/gist-vim'
+            Bundle 'scrooloose/nerdcommenter'
+            Bundle 'godlygeek/tabular'
+            if executable('ctags')
+                Bundle 'majutsushi/tagbar'
+            endif
         Bundle 'Shougo/neocomplcache.vim'
-        Bundle 'Lokaltog/vim-easymotion'
-        Bundle 'myusuf3/numbers.vim'
-        Bundle 'mbbill/undotree'
         Bundle 'airblade/vim-gitgutter'
-        Bundle 'altercation/vim-colors-solarized'
-        Bundle 'spf13/vim-colors'
-        Bundle 'spf13/vim-autoclose'
         Bundle 'tpope/vim-abolish.git'
         Bundle 'Lokaltog/vim-powerline'
+        Bundle 'ervandew/supertab'
         " Vim-scripts repos
         " Bundle 'L9'
         " non github repos
@@ -151,7 +169,7 @@
     set list
     set listchars=tab:>·,trail:•,extends:#,nbsp:.
     " Remove trailing whitespaces and ^M chars
-    autocmd FileType c,cpp,java,go,php,javascript,python,twig,xml,yml autocmd BufWritePre <buffer> call StripTrailingWhitespace()
+    autocmd FileType c,cpp,java,go,php,javascript,python,twig,xml,yml autocmd BufWritePre <buffer> call DeleteTrailingWS()
     " Automatically switch to the current file directory when a new buffer is opened
     autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
     " Allow buffer switching without saving
@@ -185,12 +203,7 @@
 
 " => Colors and Fonts {
     " Enable syntax highlighting
-    syntax enable 
-
-    try
-        colorscheme desert
-    catch
-    endtry
+    syntax enable
 
     set background=dark
 
@@ -330,6 +343,7 @@
     map <leader>to :tabonly<cr>
     map <leader>tc :tabclose<cr>
     map <leader>tm :tabmove<cr>
+    map <leader>tp :tabprev<cr>
     map <leader>t<leader> :tabnext<cr>
 
     " Opens a new tab with the current buffer's path
@@ -384,21 +398,21 @@
 
 " => Editing mappings
     " Remap VIM 0 to first non-blank character
-    map 0 ^
-    
+    "map 0 ^
+
     " Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
-    nmap <M-j> mz:m+<cr>`z
-    nmap <M-k> mz:m-2<cr>`z
-    vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-    vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
-    
-    if has("mac") || has("macunix")
-      nmap <D-j> <M-j>
-      nmap <D-k> <M-k>
-      vmap <D-j> <M-j>
-      vmap <D-k> <M-k>
-    endif
-    
+    "nmap <M-j> mz:m+<cr>`z
+    "nmap <M-k> mz:m-2<cr>`z
+    "vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+    "vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+    "if has("mac") || has("macunix")
+    "  nmap <D-j> <M-j>
+    "  nmap <D-k> <M-k>
+    "  vmap <D-j> <M-j>
+    "  vmap <D-k> <M-k>
+    "endif
+
     " Delete trailing white space on save, useful for Python and CoffeeScript ;)
     func! DeleteTrailingWS()
       exe "normal mz"
@@ -411,16 +425,16 @@
 " => vimgrep searching and cope displaying
     " When you press gv you vimgrep after the selected text
     vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
-    
+
     " Open vimgrep and put the cursor in the right position
     map <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
-    
+
     " Vimgreps in the current file
     map <leader><space> :vimgrep // <C-R>%<C-A><right><right><right><right><right><right><right><right><right>
-    
+
     " When you press <leader>r you can search and replace the selected text
     vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
-    
+
     " Do :help cope if you are unsure what cope is. It's super useful!
     "
     " When you search with vimgrep, display your results in cope by doing:
@@ -451,10 +465,8 @@
 " => Misc
     " Remove the Windows ^M - when the encodings gets messed up
     noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-    
     " Quickly open a buffer for scripbble
     map <leader>q :e ~/buffer<cr>
-    
     " Toggle paste mode on and off
     map <leader>pp :setlocal paste!<cr>
 
