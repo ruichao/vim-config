@@ -2,28 +2,32 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => GUI related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"set background
-if has('gui_running')
+" Set extra options when running in GUI mode
+if has("gui_running")
     set background=light
-else
-    set background=dark
+    set guioptions-=T
+    set guioptions-=e
+    set transparency=5 " transparency background
+    set t_Co=256
+    set guitablabel=%M\ %t
+    set go=aAce              " 去掉难看的工具栏和滑动条
 endif
 
 
 " Set font according to system
 if has("mac") || has("macunix")
-    set gfn=Menlo:h15
+    set guifont=Menlo:h14
 elseif has("win16") || has("win32")
-    set gfn=Bitstream\ Vera\ Sans\ Mono:h11
+    set guifont=Bitstream\ Vera\ Sans\ Mono:h11
 elseif has("linux")
-    set gfn=Monospace\ 11
+    set guifont=Monospace\ 11
 endif
 
 " Open MacVim in fullscreen mode
-if has("gui_macvim")
-    set fuoptions=maxvert,maxhorz
-    au GUIEnter * set fullscreen
-endif
+"if has("gui_macvim")
+"    set fuoptions=maxvert,maxhorz
+"    au GUIEnter * set fullscreen
+"endif
 
 " Disable scrollbars (real hackers don't use scrollbars for navigation!)
 set guioptions-=r

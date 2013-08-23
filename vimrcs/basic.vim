@@ -39,6 +39,7 @@
             Bundle 'scrooloose/nerdtree'
             Bundle 'altercation/vim-colors-solarized'
             Bundle 'spf13/vim-colors'
+            Bundle 'Lokaltog/vim-powerline'
             Bundle 'spf13/vim-autoclose'
             Bundle 'tpope/vim-surround'
             Bundle 'tpope/vim-repeat'
@@ -46,7 +47,7 @@
             Bundle 'terryma/vim-multiple-cursors'
             Bundle 'vim-scripts/sessionman.vim'
             Bundle 'matchit.zip'
-            Bundle 'Lokaltog/vim-asymotion'
+            Bundle 'Lokaltog/vim-easymotion'
             Bundle 'godlygeek/csapprox'
             Bundle 'jistr/vim-nerdtree-tabs'
             Bundle 'flazz/vim-colorschemes'
@@ -68,7 +69,6 @@
         Bundle 'Shougo/neocomplcache.vim'
         Bundle 'airblade/vim-gitgutter'
         Bundle 'tpope/vim-abolish.git'
-        Bundle 'Lokaltog/vim-powerline'
         Bundle 'ervandew/supertab'
         " Vim-scripts repos
         " Bundle 'L9'
@@ -207,16 +207,6 @@
 
     set background=dark
 
-    " Set extra options when running in GUI mode
-    if has("gui_running")
-        set guioptions-=T
-        set guioptions-=e
-        set t_Co=256
-        set guitablabel=%M\ %t
-        set go=aAce              " 去掉难看的工具栏和滑动条
-        set guifont=Monaco:h14   " 设置默认字体为monaco
-    endif
-
     set t_Co=256
     " Use unix, as the standard file type
     set ffs=unix,mac,dos
@@ -299,7 +289,8 @@
 
     " Linebreak on 500 characters
     set lbr
-    set tw=500
+    " set textwidth
+    " set tw=500
     " Indent at the same level of the previous line
     set autoindent
 
