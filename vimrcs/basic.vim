@@ -36,18 +36,21 @@
         " original repos on github
         " Bundle 'tpope/vim-fugitive'
         " General
-            Bundle 'scrooloose/nerdtree'
             Bundle 'altercation/vim-colors-solarized'
             Bundle 'spf13/vim-colors'
-            Bundle 'Lokaltog/vim-powerline'
+            Bundle 'bling/vim-airline'
+            " Bundle 'Lokaltog/powerline'
+            " Bundle 'Lokaltog/vim-powerline'
             Bundle 'spf13/vim-autoclose'
             Bundle 'tpope/vim-surround'
             Bundle 'tpope/vim-repeat'
+            Bundle 'scrooloose/nerdtree'
             Bundle 'kien/ctrlp.vim'
+            Bundle 'Lokaltog/vim-easymotion'
             Bundle 'terryma/vim-multiple-cursors'
             Bundle 'vim-scripts/sessionman.vim'
             Bundle 'matchit.zip'
-            Bundle 'Lokaltog/vim-easymotion'
+            " unknow function csapprox
             Bundle 'godlygeek/csapprox'
             Bundle 'jistr/vim-nerdtree-tabs'
             Bundle 'flazz/vim-colorschemes'
@@ -55,20 +58,41 @@
             Bundle 'myusuf3/numbers.vim'
             Bundle 'nathanaelkane/vim-indent-guides'
             Bundle 'tpope/vim-abolish.git'
+            Bundle 'airblade/vim-gitgutter'
         " General Programming
             " Pick one of the checksyntax, jslint, or syntastic
             Bundle 'scrooloose/syntastic'
             Bundle 'tpope/vim-fugitive'
-            Bundle 'mattn/webapi-vim'
+            " Bundle 'mattn/webapi-vim'
             Bundle 'mattn/gist-vim'
             Bundle 'scrooloose/nerdcommenter'
             Bundle 'godlygeek/tabular'
             if executable('ctags')
                 Bundle 'majutsushi/tagbar'
             endif
-        Bundle 'Shougo/neocomplcache.vim'
-        Bundle 'airblade/vim-gitgutter'
-        Bundle 'tpope/vim-abolish.git'
+        " Snippets & AutoComplete
+            Bundle 'Shougo/neocomplcache'
+            Bundle 'Shougo/neosnippet'
+            Bundle 'honza/vim-snippets'
+        " Html
+            Bundle 'amirh/HTML-AutoCloseTag'
+            Bundle 'hail2u/vim-css3-syntax'
+            Bundle 'tpope/vim-haml'
+        " Ruby
+            Bundle 'tpope/vim-rails'
+        " Python
+            Bundle 'klen/python-mode'
+            Bundle 'python.vim'
+            Bundle 'python_match.vim'
+            Bundle 'pythoncomplete'
+        " Java
+            Bundle 'derekwyatt/vim-scala'
+            Bundle 'derekwyatt/vim-sbt'
+        " Javascript
+            Bundle 'elzr/vim-json'
+            Bundle 'groenewege/vim-less'
+            Bundle 'briancollins/vim-jst'
+            Bundle 'kchmck/vim-coffee-script'
         Bundle 'ervandew/supertab'
         " Vim-scripts repos
         " Bundle 'L9'
