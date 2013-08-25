@@ -81,7 +81,7 @@
         " Ruby
             Bundle 'tpope/vim-rails'
         " Python
-            Bundle 'klen/python-mode'
+            Bundle 'nvie/vim-flake8'
             Bundle 'python.vim'
             Bundle 'python_match.vim'
             Bundle 'pythoncomplete'
