@@ -1,6 +1,4 @@
-
-"folder
-"set foldmethod=syntax
-"autocmd FileType python setlocal foldmethod=indent
-"set foldlevel=99
-"set mouse=a
+imap <C-b>   <left>
+imap <C-f>   <right>
+imap <C-e>   <End>
+imap <C-a>   <Home>
