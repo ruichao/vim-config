@@ -1,6 +1,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer:
-"       Amir Salihefendic
+"       Ruichao
 "       http://amix.dk - amix@amix.dk
 "
 " Version:
@@ -93,6 +93,8 @@
             Bundle 'groenewege/vim-less'
             Bundle 'briancollins/vim-jst'
             Bundle 'kchmck/vim-coffee-script'
+        " NodeJs
+            Bundle 'moll/vim-node'
         Bundle 'ervandew/supertab'
         " Vim-scripts repos
         " Bundle 'L9'
@@ -330,8 +332,8 @@
 
 " => Moving around, tabs, windows and buffers
     " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-    map <space> /
-    map <C-@> ?
+    "map <space> /
+    "map <C-@> ?
 
     " Toggle search highlighting
     nmap <silent> <leader>/ :set invhlsearch<cr>
@@ -346,7 +348,18 @@
     map <C-k> <C-W>k
     map <C-h> <C-W>h
     map <C-l> <C-W>l
-
+    if has("user_commands")
+        command! -bang -nargs=* -complete=file E e<bang> <args>
+        command! -bang -nargs=* -complete=file W w<bang> <args>
+        command! -bang -nargs=* -complete=file Wq wq<bang> <args>
+        command! -bang -nargs=* -complete=file WQ wq<bang> <args>
+        command! -bang Wa wa<bang>
+        command! -bang WA wa<bang>
+        command! -bang Q q<bang>
+        command! -bang QA qa<bang>
+        command! -bang Qa qa<bang>
+    endif
+    cmap Tabe tabe
     " Close the current buffer
     map <leader>bd :Bclose<cr>
 
@@ -413,7 +426,7 @@
 
 " => Editing mappings
     " Remap VIM 0 to first non-blank character
-    "map 0 ^
+    map 0 ^
 
     " Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
     "nmap <M-j> mz:m+<cr>`z
@@ -470,7 +483,6 @@
 " => Spell checking
     " Pressing ,ss will toggle and untoggle spell checking
     map <leader>ss :setlocal spell!<cr>
-    
     " Shortcuts using <leader>
     map <leader>sn ]s
     map <leader>sp [s
@@ -513,8 +525,7 @@
         let @/ = l:pattern
         let @" = l:saved_reg
     endfunction
-    
-    
+
     " Returns true if paste mode is enabled
     function! HasPaste()
         if &paste

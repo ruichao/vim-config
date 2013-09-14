@@ -1,3 +1,8 @@
+" Numbers.vim {
+    nnoremap <F4> :NumbersToggle<CR>
+    nnoremap <F3> :set nonumber!<CR>
+"}
+
 " NerdTree {
     map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
     map <leader>e :NERDTreeFind<CR>

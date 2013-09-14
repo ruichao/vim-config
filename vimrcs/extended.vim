@@ -16,7 +16,7 @@ endif
 
 " Set font according to system
 if has("mac") || has("macunix")
-    set guifont=Menlo:h14
+    set guifont=inconsolata:h16
 elseif has("win16") || has("win32")
     set guifont=Bitstream\ Vera\ Sans\ Mono:h11
 elseif has("linux")
@@ -88,7 +88,7 @@ cnoremap <C-N> <Down>
 "        else
 "            let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*/", "\\1", "")
 "        endif
-"    endif   
+"    endif
 "
 "    return g:cmd_edited
 "endfunc
