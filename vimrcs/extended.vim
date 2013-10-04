@@ -16,7 +16,8 @@ endif
 
 " Set font according to system
 if has("mac") || has("macunix")
-    set guifont=inconsolata:h16
+    "set guifont=inconsolata:h16
+    set guifont=monaco:h13
 elseif has("win16") || has("win32")
     set guifont=Bitstream\ Vera\ Sans\ Mono:h11
 elseif has("linux")
