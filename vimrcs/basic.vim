@@ -59,6 +59,8 @@
             Bundle 'nathanaelkane/vim-indent-guides'
             Bundle 'tpope/vim-abolish.git'
             Bundle 'airblade/vim-gitgutter'
+            Bundle 'kien/rainbow_parentheses.vim'
+            Bundle 'Yggdroot/indentLine'
         " General Programming
             " Pick one of the checksyntax, jslint, or syntastic
             Bundle 'scrooloose/syntastic'

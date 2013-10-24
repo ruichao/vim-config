@@ -4,7 +4,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set extra options when running in GUI mode
 if has("gui_running")
-    set background=light
+    set background=dark
     set guioptions-=T
     set guioptions-=e
     set transparency=5 " transparency background
@@ -13,6 +13,11 @@ if has("gui_running")
     set go=aAce              " 去掉难看的工具栏和滑动条
 endif
 
+" solarized scheme setting
+let g:solorized_termcolors=256
+let g:solarized_termtrans=1
+let g:solarized_contrast="normal"
+let g:solarized_visibility="normal"
 
 " Set font according to system
 if has("mac") || has("macunix")
